@@ -14,6 +14,7 @@ public class bobberController : MonoBehaviour
 
     int plainFishScore = 5;
     int sharkScore = 15;
+    int radScore = -5;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +53,14 @@ public class bobberController : MonoBehaviour
                 playerRef.GetComponent<fisherController>().updateScore(sharkScore);
 
             }
+            else if (attachedFishRef != null && attachedFishRef.tag == "radiation")
+            {
+                // Turn the fish off
+                attachedFishRef.SetActive(false);
+                // Increment Player Score
+                playerRef.GetComponent<fisherController>().updateScore(radScore);
+
+            }
 
         }
     }
@@ -60,17 +69,24 @@ public class bobberController : MonoBehaviour
     {
         Debug.Log("Bobber Hit Something!");
         if (fishAttached != true) // If there is already a fish attached don't get another
-        { 
+        {
+            attachedFishRef = collision.gameObject;
             if (collision.gameObject.tag == "plainFish")
             {
-                attachedFishRef = collision.gameObject;
+                //attachedFishRef = collision.gameObject;
                 Debug.Log("Fish Hit");
                 fishAttached = true;
             }
             if (collision.gameObject.tag == "Shark")
             {
-                attachedFishRef = collision.gameObject;
+                //attachedFishRef = collision.gameObject;
                 Debug.Log("Shark hit");
+                fishAttached = true;
+            }
+            if (collision.gameObject.tag == "radiation")
+            {
+                //attachedFishRef = collision.gameObject;
+                Debug.Log("Radiation hit");
                 fishAttached = true;
             }
         }

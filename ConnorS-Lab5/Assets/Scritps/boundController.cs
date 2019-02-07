@@ -21,5 +21,11 @@ public class boundController : MonoBehaviour
             // Flip the fishes horziontal move direction
             fishRef.GetComponent<sharkController>().flipFishDir();
         }
+        else if (collision.gameObject.tag == "radiation")
+        {
+            fishRef = collision.gameObject;
+            // Flip the fishes horziontal move direction
+            fishRef.GetComponent<radiationControl>().flipFishDir();
+        }
     }
 }

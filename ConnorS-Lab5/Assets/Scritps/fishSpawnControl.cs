@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class fishSpawnControl : MonoBehaviour
 {
-    public GameObject plainFishRef;
+    public GameObject plainFishRef, radiationRef;
     public GameObject sharkRef;
     private BoxCollider2D colldr;
     public float spawnRateplainFish, nextPF;
     public float spawnRateSharks, nextShark;
+    public float spawnRateRad, nextRad;
     Vector2 locSpawn;
     float randY;
     
@@ -18,8 +19,10 @@ public class fishSpawnControl : MonoBehaviour
     {
         nextPF = 0f; // Get ready to spawn an enemy
         nextShark = 3f;
-        spawnRateplainFish = 4.0f; // How long to wait between spawns
-        spawnRateSharks = 9.0f;
+        nextRad = 0f;
+        spawnRateplainFish = 5.0f; // How long to wait between spawns
+        spawnRateRad = 6.0f; //How long to wait for next rad
+        spawnRateSharks = 12.0f;
         colldr = GetComponent<BoxCollider2D>();
 
     }
@@ -28,7 +31,7 @@ public class fishSpawnControl : MonoBehaviour
     void Update()
     {
         Vector2 spawnPos;
-        // Spawn Plain Fish
+        // Spawn Fish and Radiation
         if (Time.time > nextPF)
         {
             nextPF = Time.time + spawnRateplainFish;
@@ -43,6 +46,13 @@ public class fishSpawnControl : MonoBehaviour
             spawnPos = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
             spawnPos = transform.TransformPoint(spawnPos * 0.5f);
             Instantiate(sharkRef, spawnPos, transform.rotation);
+        }
+        if (Time.time > nextRad)
+        {
+            nextRad = Time.time + spawnRateRad;
+            spawnPos = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+            spawnPos = transform.TransformPoint(spawnPos * 0.5f);
+            Instantiate(radiationRef, spawnPos, transform.rotation);
 
         }
     }
