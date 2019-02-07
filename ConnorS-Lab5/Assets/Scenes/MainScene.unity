@@ -439,7 +439,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 506632781}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.0209928, y: 1.5, z: 0}
+  m_LocalPosition: {x: 7.0209928, y: 2, z: 0}
   m_LocalScale: {x: 10, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -810,6 +810,7 @@ MonoBehaviour:
   ropeEndRef: {fileID: 269271535}
   ropeOriginRef: {fileID: 430299562}
   playerRef: {fileID: 199540018}
+  fishSpawnerRef: {fileID: 1483199855}
   onNoClip: {fileID: 8300000, guid: d39fb277b574d3b49b31ba39e005a3e8, type: 3}
   ohYeahClip: {fileID: 8300000, guid: 11ec049e4cbf7f44a918328ce485246b, type: 3}
   fishAttached: 0
@@ -2018,6 +2019,7 @@ MonoBehaviour:
   nextShark: 0
   spawnRateRad: 0
   nextRad: 0
+  currentSpawns: 0
 --- !u!65 &1483199857
 BoxCollider:
   m_ObjectHideFlags: 0

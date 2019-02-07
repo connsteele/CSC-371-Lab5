@@ -10,6 +10,8 @@ public class fishSpawnControl : MonoBehaviour
     public float spawnRateplainFish, nextPF;
     public float spawnRateSharks, nextShark;
     public float spawnRateRad, nextRad;
+    int maxSpawns = 30;
+    public int currentSpawns = 0;
     Vector2 locSpawn;
     float randY;
     
@@ -32,28 +34,33 @@ public class fishSpawnControl : MonoBehaviour
     {
         Vector2 spawnPos;
         // Spawn Fish and Radiation
-        if (Time.time > nextPF)
-        {
-            nextPF = Time.time + spawnRateplainFish;
-            spawnPos = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
-            spawnPos = transform.TransformPoint(spawnPos * 0.5f);
-            Instantiate(plainFishRef, spawnPos, transform.rotation);
+        if (currentSpawns < maxSpawns)
+        { 
+            if (Time.time > nextPF)
+            {
+                nextPF = Time.time + spawnRateplainFish;
+                spawnPos = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+                spawnPos = transform.TransformPoint(spawnPos * 0.5f);
+                Instantiate(plainFishRef, spawnPos, transform.rotation);
+                currentSpawns += 1;
 
+            }
+            if (Time.time > nextShark)
+            {
+                nextShark = Time.time + spawnRateSharks;
+                spawnPos = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+                spawnPos = transform.TransformPoint(spawnPos * 0.5f);
+                Instantiate(sharkRef, spawnPos, transform.rotation);
+                currentSpawns += 1;
+            }
+            if (Time.time > nextRad)
+            {
+                nextRad = Time.time + spawnRateRad;
+                spawnPos = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+                spawnPos = transform.TransformPoint(spawnPos * 0.5f);
+                Instantiate(radiationRef, spawnPos, transform.rotation);
+                currentSpawns += 1;
         }
-        if (Time.time > nextShark)
-        {
-            nextShark = Time.time + spawnRateSharks;
-            spawnPos = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
-            spawnPos = transform.TransformPoint(spawnPos * 0.5f);
-            Instantiate(sharkRef, spawnPos, transform.rotation);
-        }
-        if (Time.time > nextRad)
-        {
-            nextRad = Time.time + spawnRateRad;
-            spawnPos = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
-            spawnPos = transform.TransformPoint(spawnPos * 0.5f);
-            Instantiate(radiationRef, spawnPos, transform.rotation);
-
         }
     }
 }

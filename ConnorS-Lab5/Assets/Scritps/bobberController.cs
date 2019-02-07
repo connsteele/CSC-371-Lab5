@@ -7,6 +7,7 @@ public class bobberController : MonoBehaviour
     public GameObject ropeEndRef;
     public GameObject ropeOriginRef;
     public GameObject playerRef;
+    public GameObject fishSpawnerRef;
     public AudioClip onNoClip;
     public AudioClip ohYeahClip;
     AudioSource audSource;
@@ -38,6 +39,7 @@ public class bobberController : MonoBehaviour
         if ((ropeOriginRef.transform.localScale.y < 0.4f) && (fishAttached == true))
         {
             fishAttached = false;
+            fishSpawnerRef.GetComponent<fishSpawnControl>().currentSpawns -= 1; // Subtract 1 from current spawned
             if (attachedFishRef != null && attachedFishRef.tag == "plainFish")
             {
                 // Turn the fish off
