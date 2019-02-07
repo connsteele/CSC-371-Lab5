@@ -7,7 +7,9 @@ public class bobberController : MonoBehaviour
     public GameObject ropeEndRef;
     public GameObject ropeOriginRef;
     public GameObject playerRef;
-    AudioSource ohYeahSource;
+    public AudioClip onNoClip;
+    public AudioClip ohYeahClip;
+    AudioSource audSource;
     GameObject attachedFishRef;
     private Vector3 offset;
     public bool fishAttached;
@@ -23,7 +25,7 @@ public class bobberController : MonoBehaviour
         // Calculate offset
         offset = transform.position - ropeEndRef.transform.position;
         fishAttached = false;
-        ohYeahSource = GetComponent<AudioSource>();
+        audSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -46,7 +48,9 @@ public class bobberController : MonoBehaviour
             }
             else if (attachedFishRef != null && attachedFishRef.tag == "Shark")
             {
-                ohYeahSource.Play();
+                //ohYeahSource.Play();
+                audSource.clip = ohYeahClip;
+                audSource.Play(); // Oh Yea
                 // Turn the fish off
                 attachedFishRef.SetActive(false);
                 // Increment Player Score
@@ -55,6 +59,8 @@ public class bobberController : MonoBehaviour
             }
             else if (attachedFishRef != null && attachedFishRef.tag == "radiation")
             {
+                audSource.clip = onNoClip;
+                audSource.Play(); // Oh Yea
                 // Turn the fish off
                 attachedFishRef.SetActive(false);
                 // Increment Player Score

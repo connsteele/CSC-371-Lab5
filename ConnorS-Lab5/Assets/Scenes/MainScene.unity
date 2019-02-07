@@ -171,7 +171,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5d6d0a70cb2839a40a77b01fd5daeea7, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -810,6 +810,8 @@ MonoBehaviour:
   ropeEndRef: {fileID: 269271535}
   ropeOriginRef: {fileID: 430299562}
   playerRef: {fileID: 199540018}
+  onNoClip: {fileID: 8300000, guid: d39fb277b574d3b49b31ba39e005a3e8, type: 3}
+  ohYeahClip: {fileID: 8300000, guid: 11ec049e4cbf7f44a918328ce485246b, type: 3}
   fishAttached: 0
 --- !u!58 &697824497
 CircleCollider2D:
@@ -858,7 +860,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 11ec049e4cbf7f44a918328ce485246b, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
