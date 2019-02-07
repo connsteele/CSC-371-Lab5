@@ -19,24 +19,22 @@ public class fisherController : MonoBehaviour
     {
         // Check to see if the position should be updated
         float horzMove = Input.GetAxis("Horizontal");
-        float xMove = 2.0f;
+        float xMove = 5.0f;
+        float interpHorzPos;
         if (horzMove > 0) // Positive movement
         {
-            //Vector2 moveForce = new Vector2(xMove, 0);
-            //rb2dref.AddForce(moveForce);
-            float interpHorzPos = Mathf.Lerp(rb2dref.position.x, rb2dref.position.x + xMove, Time.deltaTime);
+            // Update the horizontal position in +x direction
+            interpHorzPos = Mathf.Lerp(rb2dref.position.x, rb2dref.position.x + xMove, Time.deltaTime * 0.25f);
             rb2dref.position = new Vector2(interpHorzPos, rb2dref.position.y); // update the position to the interpolated one 
 
         }
         else if (horzMove < 0) // Negative movement
         {
-            //Vector2 moveForce = new Vector2(-xMove, 0);
-            //rb2dref.AddForce(moveForce);
-            rb2dref.position = new Vector2(rb2dref.position.x - xMove, rb2dref.position.y); // update the position
+            // Update the horizontal position in -x direction
+            interpHorzPos = Mathf.Lerp(rb2dref.position.x, rb2dref.position.x - xMove, Time.deltaTime * 0.25f);
+            rb2dref.position = new Vector2(interpHorzPos, rb2dref.position.y); // update the position to the interpolated one 
         }
-        //Vector2 moveForce = new Vector2(xMove, 0);
-        //rb2dref.velocity = Vector2.zero;
-        //rb2dref.AddForce(moveForce);
+
 
     }
 }
