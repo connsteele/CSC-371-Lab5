@@ -5,38 +5,52 @@ using UnityEngine;
 public class plainFishController : MonoBehaviour
 {
     GameObject bobberRef;
+    private Rigidbody2D rb2d;
     public bool attachToBob = false;
+    float movedir = 1; // either 1 or -1, to flip directions
+    private SpriteRenderer sprRndr;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb2d = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Move new fishes on screen
+        float moveSpeed = 3.5f;
+        float interpHorzPos = Mathf.Lerp(transform.position.x, transform.position.x + (moveSpeed * movedir), Time.deltaTime);
+        rb2d.position = new Vector2(interpHorzPos, transform.position.y);
+        
+
         if (bobberRef != null && attachToBob == true)
         {
             transform.position = bobberRef.transform.position;
         }
     }
 
-    // Called by the bobberController Script
-    public void flyUp()
-    {
-        Debug.Log("Fly up!");
-        //transform.position = bobberRef.transform.position;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("plain fish trigger went off");
         if (collision.gameObject.tag == "bobber")
         {
-            Debug.Log("Contacted the bobber");
-            attachToBob = true;
             bobberRef = collision.gameObject;
+            if (bobberRef.GetComponent<bobberController>().fishAttached != true)
+            {
+                attachToBob = true;
+            }
         }
     }
+
+    // My Funcs
+
+    // Called by bound Controller
+    public void flipFishDir()
+    {
+        movedir *= -1; // flip the movement dir
+        sprRndr = GetComponent<SpriteRenderer>();
+        sprRndr.flipX = !sprRndr.flipX; // Toggle the flip direction
+    }
+    
 }

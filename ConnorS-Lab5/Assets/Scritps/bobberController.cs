@@ -7,11 +7,13 @@ public class bobberController : MonoBehaviour
     public GameObject ropeEndRef;
     public GameObject ropeOriginRef;
     public GameObject playerRef;
+    AudioSource ohYeahSource;
     GameObject attachedFishRef;
     private Vector3 offset;
     public bool fishAttached;
 
     int plainFishScore = 5;
+    int sharkScore = 15;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +22,7 @@ public class bobberController : MonoBehaviour
         // Calculate offset
         offset = transform.position - ropeEndRef.transform.position;
         fishAttached = false;
+        ohYeahSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -40,20 +43,36 @@ public class bobberController : MonoBehaviour
                 playerRef.GetComponent<fisherController>().updateScore(plainFishScore);
 
             }
-            
+            else if (attachedFishRef != null && attachedFishRef.tag == "Shark")
+            {
+                ohYeahSource.Play();
+                // Turn the fish off
+                attachedFishRef.SetActive(false);
+                // Increment Player Score
+                playerRef.GetComponent<fisherController>().updateScore(sharkScore);
+
+            }
+
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Bobber Hit Something!");
-        if (collision.gameObject.tag == "plainFish")
-        {
-            attachedFishRef = collision.gameObject;
-            Debug.Log("FISH HIT");
-            fishAttached = true;
-            // call public func that belongs to another class
-            attachedFishRef.GetComponent<plainFishController>().flyUp();
+        if (fishAttached != true) // If there is already a fish attached don't get another
+        { 
+            if (collision.gameObject.tag == "plainFish")
+            {
+                attachedFishRef = collision.gameObject;
+                Debug.Log("Fish Hit");
+                fishAttached = true;
+            }
+            if (collision.gameObject.tag == "Shark")
+            {
+                attachedFishRef = collision.gameObject;
+                Debug.Log("Shark hit");
+                fishAttached = true;
+            }
         }
     }
 }

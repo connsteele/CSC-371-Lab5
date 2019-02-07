@@ -7,7 +7,10 @@ public class fisherController : MonoBehaviour
 {
     public Text scoreString;
     private Rigidbody2D rb2dref;
-    int playerScore;
+    public int playerScore;
+    public bool canMoveL = true;
+    public bool canMoveR = true;
+    AudioSource dingSFX;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +19,7 @@ public class fisherController : MonoBehaviour
         rb2dref = GetComponent<Rigidbody2D>();
         playerScore = 0;
         scoreString.text = "Player Score: " + playerScore.ToString();
+        dingSFX = GetComponent<AudioSource>();
 
     }
 
@@ -28,7 +32,7 @@ public class fisherController : MonoBehaviour
         float interpHorzPos;
 
 
-        if (horzMove > 0) // Positive movement
+        if (horzMove > 0 && canMoveR == true) // Positive movement
         {
             if (transform.localScale.x > 0)
             {
@@ -41,7 +45,7 @@ public class fisherController : MonoBehaviour
             rb2dref.position = new Vector2(interpHorzPos, rb2dref.position.y); // update the position to the interpolated one 
 
         }
-        else if (horzMove < 0) // Negative movement
+        else if (horzMove < 0 && canMoveL == true) // Negative movement
         {
             if (transform.localScale.x < 0)
             {
@@ -66,5 +70,6 @@ public class fisherController : MonoBehaviour
         playerScore += pts;
         updateScoreUI();
         Debug.Log("Player Score is: " + playerScore);
+        dingSFX.Play();
     }
 }
